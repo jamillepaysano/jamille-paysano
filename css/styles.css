@@ -51,7 +51,6 @@ a:hover{color:var(--clay-deep)}
   letter-spacing:-.015em;
   line-height:1.06;
 }
-.display em{font-style:italic;color:var(--clay)}
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:7px;
