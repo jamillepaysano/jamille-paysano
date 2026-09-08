@@ -369,7 +369,14 @@ a:hover{color:var(--clay-deep)}
    o tamanho da abertura era ignorado. Qualifica para empatar e vencer. */
 .prose p.prose-intro{font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.34;letter-spacing:-.015em;color:var(--ink);margin-bottom:2px}
 
-.two-col{display:grid;grid-template-columns:1.4fr .6fr;gap:44px;align-items:start}
+/* A coluna do texto e dimensionada pelo proprio texto, nao por fracao:
+   com 1.4fr ela media 737px enquanto a prosa, limitada pela medida de
+   leitura, ocupava 384px — sobravam ~400px de vao ate a foto. */
+.two-col{
+  display:grid;
+  grid-template-columns:minmax(0,var(--measure)) minmax(0,316px);
+  gap:48px;align-items:start;justify-content:start;
+}
 
 /* ---------- rodapé ---------- */
 
