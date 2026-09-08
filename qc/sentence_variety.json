@@ -1,0 +1,31 @@
+{
+  "detector": "check_sentence_variety",
+  "manuscript": "/private/tmp/claude-501/-Users-visionmauri-Projetos-jamille-paysano/3feb5f84-25fe-439e-bf3d-037cbd474914/scratchpad/post.md",
+  "short_max": 12,
+  "long_min": 25,
+  "long_max": 70,
+  "stats": {
+    "sentences": 68,
+    "short_count": 9,
+    "long_count": 28,
+    "median_words": 22.5,
+    "min_words": 4,
+    "max_words": 132,
+    "stdev_words": 18.2,
+    "over_rule7_band_count": 12,
+    "overlong_word_counts": [
+      132
+    ]
+  },
+  "claims": [
+    {
+      "verdict": "SENTENCE_OVERLONG",
+      "severity": "Minor",
+      "count": 1,
+      "word_counts": [
+        132
+      ],
+      "message": "1 sentence(s) over 70 words (132). Rule 7's long band is 25-35 words; 70 is twice its top, so these are not 'a longer one' in the sense the rule means — the reader loses the subject before the verb arrives. Split them."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "detector": "check_rewrite_fidelity",
+  "before": "/private/tmp/claude-501/-Users-visionmauri-Projetos-jamille-paysano/3feb5f84-25fe-439e-bf3d-037cbd474914/scratchpad/pre.md",
+  "after": "/private/tmp/claude-501/-Users-visionmauri-Projetos-jamille-paysano/3feb5f84-25fe-439e-bf3d-037cbd474914/scratchpad/post.md",
+  "changed_pct": 14.1,
+  "words_before": 1772,
+  "words_after": 1744,
+  "claims": []
+}
