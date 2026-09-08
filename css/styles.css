@@ -1,0 +1,259 @@
+/* ============================================================
+   Jamille Paysano Hissa — identidade visual
+   Editorial de moda com rigor de gestão.
+   Bone + ink + argila. Serifa didone no display, sans no corpo.
+   ============================================================ */
+
+:root{
+  --bone:#F7F3ED;
+  --bone-2:#EFE9E0;
+  --ink:#15120E;
+  --ink-soft:#3A342C;
+  --stone:#6E665B;
+  --line:#DDD3C5;
+  --clay:#A4482A;
+  --clay-deep:#7E351D;
+  --sand:#E6DCCD;
+  --white:#FFFFFF;
+  --radius:2px;
+  --wrap:1180px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{font-size:16px;scroll-behavior:smooth}
+
+body{
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bone);
+  color:var(--ink);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+
+main{flex:1}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 2rem}
+
+/* ---------- tipografia ---------- */
+
+.display{
+  font-family:'Bodoni Moda',Georgia,serif;
+  font-weight:400;
+  letter-spacing:-.015em;
+  line-height:1.04;
+}
+.display em{font-style:italic;color:var(--clay)}
+
+.eyebrow{
+  font-size:.7rem;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--clay);
+}
+.eyebrow--muted{color:var(--stone)}
+
+.lede{font-size:1.12rem;font-weight:300;color:var(--ink-soft);line-height:1.75}
+
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+/* ---------- header ---------- */
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  transition:background .35s ease, box-shadow .35s ease;
+}
+header.scrolled{
+  background:rgba(247,243,237,.94);
+  backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--line);
+}
+.navbar{
+  max-width:var(--wrap);margin:0 auto;padding:0 2rem;height:68px;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.brand{display:flex;align-items:baseline;gap:.55rem}
+.brand-mark{
+  font-family:'Bodoni Moda',serif;font-size:1.45rem;font-weight:400;
+  letter-spacing:.02em;
+}
+.brand-mark span{color:var(--clay);font-style:italic}
+.brand-sub{
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
+}
+.nav-links{display:flex;align-items:center;gap:1.85rem;list-style:none}
+.nav-links a{
+  font-size:.82rem;letter-spacing:.04em;color:var(--ink-soft);
+  padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--clay)}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0;transition:.25s}
+
+/* ---------- hero ---------- */
+
+.hero{padding:11rem 0 5.5rem;position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;right:-14vw;top:14%;
+  width:46vw;height:46vw;max-width:620px;max-height:620px;
+  border:1px solid var(--line);border-radius:50%;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.55fr .95fr;gap:4.5rem;align-items:end;position:relative;z-index:2}
+.hero-name{font-size:clamp(3rem,7.5vw,6rem);margin:1.4rem 0 1.8rem}
+.hero-mission{max-width:34rem;margin-bottom:2.4rem}
+
+.cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.82rem 1.7rem;font-size:.83rem;letter-spacing:.06em;
+  text-transform:uppercase;font-weight:500;border-radius:var(--radius);
+  transition:.22s ease;border:1px solid transparent;
+}
+.btn-solid{background:var(--ink);color:var(--bone)}
+.btn-solid:hover{background:var(--clay)}
+.btn-ghost{border-color:var(--line);color:var(--ink-soft)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
+
+/* ficha lateral do hero */
+.spec{border-top:2px solid var(--ink);padding-top:1.1rem}
+.spec-row{display:flex;justify-content:space-between;gap:1rem;padding:.72rem 0;border-bottom:1px solid var(--line);font-size:.84rem}
+.spec-row dt{color:var(--stone);letter-spacing:.02em}
+.spec-row dd{text-align:right;font-weight:500}
+
+/* ---------- seções ---------- */
+
+.section{padding:5.5rem 0}
+.section--alt{background:var(--bone-2)}
+.section-head{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:2.6rem}
+.section-num{
+  font-family:'Bodoni Moda',serif;font-size:.95rem;color:var(--clay);
+  font-style:italic;padding-top:.2rem;
+}
+.section-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:400;line-height:1.1}
+
+.two-col{display:grid;grid-template-columns:1.35fr .65fr;gap:4rem;align-items:start}
+.prose p{margin-bottom:1.15rem;color:var(--ink-soft)}
+.prose p:last-child{margin-bottom:0}
+.pull{
+  font-family:'Bodoni Moda',serif;font-size:1.32rem;line-height:1.45;
+  border-left:2px solid var(--clay);padding-left:1.3rem;color:var(--ink);
+}
+.pull-cap{margin-top:1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
+
+/* ---------- grade de expertise ---------- */
+
+.grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cardx{background:var(--bone);padding:2rem 1.6rem;transition:background .25s ease}
+.cardx:hover{background:var(--white)}
+.cardx-tag{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--stone);margin-bottom:.85rem;display:block;
+}
+.cardx-tag--dual{color:var(--clay);font-weight:600}
+.cardx h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.16rem;line-height:1.25;margin-bottom:.7rem}
+.cardx p{font-size:.87rem;color:var(--stone);line-height:1.62}
+.cardx-icon{width:26px;height:26px;margin-bottom:1.15rem;stroke:var(--ink);fill:none;stroke-width:1.4}
+
+/* ---------- eixos ---------- */
+
+.axes{display:grid;grid-template-columns:repeat(3,1fr);gap:2.6rem}
+.axis{border-top:2px solid var(--ink);padding-top:1.2rem}
+.axis-n{font-family:'Bodoni Moda',serif;font-style:italic;color:var(--clay);font-size:.95rem}
+.axis h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.3rem;margin:.35rem 0 .8rem}
+.axis p{font-size:.9rem;color:var(--stone);margin-bottom:.9rem}
+.axis ul{list-style:none;font-size:.86rem;color:var(--ink-soft)}
+.axis li{padding-left:1rem;position:relative;margin-bottom:.45rem}
+.axis li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:1px;background:var(--clay)}
+.axis-note{margin-top:1rem;font-size:.78rem;font-style:italic;color:var(--stone);line-height:1.6}
+
+/* ---------- listagem (experiência, formação) ---------- */
+
+.entry{display:grid;grid-template-columns:170px 1fr;gap:2.5rem;padding:2.2rem 0;border-bottom:1px solid var(--line)}
+.entry:first-of-type{border-top:1px solid var(--line)}
+.entry-date{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);padding-top:.35rem}
+.entry h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.42rem;line-height:1.2;margin-bottom:.25rem}
+.entry-org{font-size:.88rem;color:var(--clay);margin-bottom:1rem}
+.entry ul{list-style:none}
+.entry li{padding-left:1.15rem;position:relative;margin-bottom:.55rem;color:var(--ink-soft);font-size:.94rem}
+.entry li::before{content:"";position:absolute;left:0;top:.68em;width:6px;height:1px;background:var(--stone)}
+
+/* ---------- projetos ---------- */
+
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem}
+.project{border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column}
+.project-canvas{
+  aspect-ratio:4/3;background:var(--sand);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.project-canvas span{
+  font-family:'Bodoni Moda',serif;font-size:.74rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--stone);
+}
+.project-body{padding:1.7rem}
+.project h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.3rem;margin-bottom:.4rem}
+.project-meta{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:.9rem}
+.project p{font-size:.9rem;color:var(--stone)}
+
+/* ---------- tabela de competências ---------- */
+
+.skills{border-top:2px solid var(--ink)}
+.skill-row{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:1.05rem 0;border-bottom:1px solid var(--line)}
+.skill-row dt{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);padding-top:.15rem}
+.skill-row dd{font-size:.93rem;color:var(--ink-soft)}
+
+/* ---------- contato ---------- */
+
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.contact-cell{background:var(--bone);padding:2.2rem 1.8rem}
+.contact-cell .eyebrow{margin-bottom:.6rem;display:block}
+.contact-cell a,.contact-cell p{font-family:'Bodoni Moda',serif;font-size:1.18rem;color:var(--ink);word-break:break-word}
+.contact-cell a:hover{color:var(--clay)}
+
+/* ---------- rodapé ---------- */
+
+footer{border-top:1px solid var(--line);padding:2.6rem 0;margin-top:auto;background:var(--bone)}
+.footer-in{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.footer-in p,.footer-in a{font-size:.8rem;color:var(--stone)}
+.footer-links{display:flex;gap:1.4rem}
+.footer-links a:hover{color:var(--clay)}
+
+/* ---------- página interna ---------- */
+
+.page-head{padding:10rem 0 3.2rem;border-bottom:1px solid var(--line)}
+.page-head .display{font-size:clamp(2.4rem,5.5vw,4rem);margin-top:1rem}
+.page-head .lede{margin-top:1.3rem;max-width:44rem}
+
+/* ---------- reveal ---------- */
+
+.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+.js-reveal{opacity:0;transform:translateY(24px)}
+.js-reveal.on{opacity:1;transform:translateY(0)}
+
+/* ---------- responsivo ---------- */
+
+@media(max-width:960px){
+  .hero-grid,.two-col{grid-template-columns:1fr;gap:2.6rem}
+  .grid-6{grid-template-columns:repeat(2,1fr)}
+  .axes{grid-template-columns:1fr;gap:2rem}
+  .projects{grid-template-columns:1fr}
+  .hero::after{display:none}
+}
+@media(max-width:680px){
+  .wrap,.navbar{padding:0 1.25rem}
+  .hero{padding:8.5rem 0 4rem}
+  .grid-6{grid-template-columns:1fr}
+  .entry{grid-template-columns:1fr;gap:.8rem}
+  .contact-grid{grid-template-columns:1fr}
+  .skill-row{grid-template-columns:1fr;gap:.35rem}
+  .nav-toggle{display:block}
+  .nav-links{
+    position:absolute;top:68px;left:0;right:0;flex-direction:column;
+    align-items:flex-start;gap:0;background:var(--bone);
+    border-top:1px solid var(--line);padding:.5rem 1.25rem 1.25rem;
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .nav-links.open{max-height:340px}
+  .nav-links li{width:100%;border-bottom:1px solid var(--line)}
+  .nav-links a{display:block;padding:.85rem 0;border-bottom:0}
+}
