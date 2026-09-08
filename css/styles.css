@@ -9,18 +9,23 @@
   --surface:#FFFFFF;
   --ink:#1C1917;
   --ink-2:#57534E;
-  /* Contraste medido sobre --bg: ink-3 5.9:1, muted 5.5:1, faint 4.6:1.
+  /* Contraste medido sobre --bg: ink-3 5.9:1, muted 5.4:1, faint 5.1:1.
      Os três passam no AA (4.5:1) em texto pequeno — inclusive rótulo
-     e legenda, que são texto de leitura, não decoração. */
+     e legenda, que são texto de leitura, não decoração. O --faint é
+     medido também sobre --clay-wash (4.8:1), que é fundo de card. */
   --ink-3:#6B645F;
   --muted:#6E665F;
-  --faint:#787069;
+  --faint:#726A63;
   --line:#E7E2DA;
   --line-2:#EDE8E0;
-  --clay:#8C4A32;
-  --clay-deep:#6B3524;
-  --clay-line:#E0CFC5;
-  --clay-wash:#F4F1EC;
+
+  /* Accent: azul-ardósia. Azul lê como gestão/corporativo; o tom
+     acinzentado evita o azul-genérico e conversa com o fundo quente.
+     8.7:1 sobre --bg e 9.1:1 para branco sobre ele. */
+  --clay:#2C4A6E;
+  --clay-deep:#1E3550;
+  --clay-line:#CFD8E4;
+  --clay-wash:#F0F3F7;
 
   --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
   --sans:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
@@ -401,6 +406,42 @@ a:hover{color:var(--clay-deep)}
   .foot-links{flex-wrap:wrap;gap:14px}
 }
 
+/* ---------- cursor ---------- */
+
+/* Dois circulos que seguem o mouse: um ponto solido, como a cabeca de um
+   alfinete, e um anel que persegue com atraso, como a linha atras da
+   agulha. O cursor do sistema fica: isso e camada decorativa, nunca a
+   unica pista de onde esta o ponteiro. */
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;z-index:9999;
+  pointer-events:none;border-radius:50%;
+  opacity:0;transition:opacity .3s ease;
+  will-change:transform;
+}
+.cursor-dot{
+  width:6px;height:6px;margin:-3px 0 0 -3px;
+  background:var(--clay);
+}
+.cursor-ring{
+  width:30px;height:30px;margin:-15px 0 0 -15px;
+  border:1px solid var(--clay-line);
+  transition:opacity .3s ease,width .18s ease,height .18s ease,
+             margin .18s ease,border-color .18s ease;
+}
+.cursor-on .cursor-dot,.cursor-on .cursor-ring{opacity:1}
+
+/* Sobre algo clicavel o anel abre e escurece: confirma o alvo sem
+   depender de cor no proprio elemento. */
+.cursor-active .cursor-ring{
+  width:46px;height:46px;margin:-23px 0 0 -23px;
+  border-color:var(--clay);
+}
+
+/* Nada disso em telas de toque, que nao tem ponteiro. */
+@media(hover:none),(pointer:coarse){
+  .cursor-dot,.cursor-ring{display:none}
+}
+
 /* ---------- movimento reduzido ---------- */
 
 /* Quem pediu menos animacao ve o conteudo direto, sem transicao e sem
@@ -412,4 +453,6 @@ a:hover{color:var(--clay-deep)}
     transition-duration:.01ms!important;scroll-behavior:auto!important;
   }
   .js-reveal{opacity:1;transform:none}
+  /* o cursor que persegue e movimento continuo: sai por completo */
+  .cursor-dot,.cursor-ring{display:none}
 }
