@@ -1,19 +1,19 @@
 /* ============================================================
    Jamille Paysano Hissa — identidade visual
    Editorial de moda com rigor de gestão.
-   Bone + ink + argila. Serifa didone no display, sans no corpo.
+   Branco + ink + argila. Serifa didone no display, sans no corpo.
    ============================================================ */
 
 :root{
-  --bone:#F7F3ED;
-  --bone-2:#EFE9E0;
+  --bone:#FFFFFF;
+  --bone-2:#F5F5F4;
   --ink:#15120E;
   --ink-soft:#3A342C;
   --stone:#6E665B;
-  --line:#DDD3C5;
+  --line:#E4E2DE;
   --clay:#A4482A;
   --clay-deep:#7E351D;
-  --sand:#E6DCCD;
+  --sand:#EDEDEB;
   --white:#FFFFFF;
   --radius:2px;
   --wrap:1180px;
@@ -65,7 +65,7 @@ header{
   transition:background .35s ease, box-shadow .35s ease;
 }
 header.scrolled{
-  background:rgba(247,243,237,.94);
+  background:rgba(255,255,255,.94);
   backdrop-filter:blur(14px);
   box-shadow:0 1px 0 var(--line);
 }
@@ -141,10 +141,46 @@ header.scrolled{
 }
 .pull-cap{margin-top:1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
 
+/* ---------- retrato ---------- */
+
+/* imagem a esquerda, texto a direita: inverte a proporcao padrao do .two-col */
+.two-col--portrait{grid-template-columns:.72fr 1.28fr;align-items:start}
+
+.portrait{position:relative}
+.portrait img{
+  width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 12%;
+  background:var(--sand);border-radius:var(--radius);
+  /* o fundo de estudio da foto e branco: sem o fio a borda some na faixa clara */
+  border:1px solid var(--line);
+}
+/* moldura deslocada, mesmo gesto do circulo do hero */
+.portrait::before{
+  content:"";position:absolute;inset:auto auto -14px -14px;
+  width:62%;height:62%;border:1px solid var(--clay);
+  border-radius:var(--radius);z-index:-1;pointer-events:none;
+}
+.portrait figcaption{
+  margin-top:1.15rem;font-size:.76rem;line-height:1.55;
+  letter-spacing:.02em;color:var(--stone);
+}
+.portrait figcaption strong{
+  display:block;font-family:'Bodoni Moda',Georgia,serif;
+  font-size:1.02rem;font-weight:400;letter-spacing:0;
+  color:var(--ink);margin-bottom:.2rem;
+}
+
+.prose-intro{
+  font-family:'Bodoni Moda',Georgia,serif;
+  font-size:1.42rem;line-height:1.35;color:var(--ink);
+  margin-bottom:1.5rem;
+}
+
+.two-col--portrait .pull{margin-top:2rem}
+
 /* ---------- grade de expertise ---------- */
 
 .grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.cardx{background:var(--bone);padding:2rem 1.6rem;transition:background .25s ease}
+.cardx{background:var(--bone-2);padding:2rem 1.6rem;transition:background .25s ease}
 .cardx:hover{background:var(--white)}
 .cardx-tag{
   font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
@@ -233,7 +269,9 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0;margin-top:auto;backgro
 /* ---------- responsivo ---------- */
 
 @media(max-width:960px){
-  .hero-grid,.two-col{grid-template-columns:1fr;gap:2.6rem}
+  .hero-grid,.two-col,.two-col--portrait{grid-template-columns:1fr;gap:2.6rem}
+  /* a moldura deslocada sai do wrap quando o retrato ocupa a coluna toda */
+  .portrait{max-width:320px;margin-left:14px}
   .grid-6{grid-template-columns:repeat(2,1fr)}
   .axes{grid-template-columns:1fr;gap:2rem}
   .projects{grid-template-columns:1fr}
