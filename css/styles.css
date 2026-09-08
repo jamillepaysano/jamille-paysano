@@ -9,9 +9,12 @@
   --surface:#FFFFFF;
   --ink:#1C1917;
   --ink-2:#57534E;
-  --ink-3:#78716C;
-  --muted:#8A8178;
-  --faint:#A8A099;
+  /* Contraste medido sobre --bg: ink-3 5.9:1, muted 5.5:1, faint 4.6:1.
+     Os três passam no AA (4.5:1) em texto pequeno — inclusive rótulo
+     e legenda, que são texto de leitura, não decoração. */
+  --ink-3:#6B645F;
+  --muted:#6E665F;
+  --faint:#787069;
   --line:#E7E2DA;
   --line-2:#EDE8E0;
   --clay:#8C4A32;
@@ -24,6 +27,13 @@
 
   --nav-w:208px;
   --pad-x:60px;
+
+  /* Largura de leitura. Medido no browser: o "0" da Inter é mais estreito
+     que a média das minúsculas, então 1ch rende ~1.75 caractere real.
+     --measure dá ~66 caracteres por linha (prosa corrida);
+     --measure-2 dá ~54, para texto curto dentro de grade. */
+  --measure:38ch;
+  --measure-2:46ch;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -59,7 +69,7 @@ a:hover{color:var(--clay-deep)}
 }
 .eyebrow--muted{color:var(--muted)}
 
-.lede{font-size:17.5px;line-height:1.7;color:var(--ink-2);text-wrap:pretty}
+.lede{font-size:18px;line-height:1.7;color:var(--ink-2);text-wrap:pretty;max-width:52ch}
 
 /* ---------- layout base ---------- */
 
@@ -91,7 +101,7 @@ a:hover{color:var(--clay-deep)}
 .brand-mark span{font-style:italic;color:var(--clay)}
 .brand-sub{
   display:block;margin-top:8px;
-  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
 }
 
 .nav{display:flex;flex-direction:column;gap:2px;padding:0 16px;list-style:none}
@@ -111,7 +121,11 @@ a:hover{color:var(--clay-deep)}
 .social svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
 .sidebar-base{font-size:11px;color:var(--faint);line-height:1.5}
 
-.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.nav-toggle{
+  display:none;background:none;border:0;cursor:pointer;
+  padding:6px;min-width:44px;min-height:44px;
+  align-items:center;justify-content:center;
+}
 .nav-toggle svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round}
 .topbar{display:none}
 
@@ -135,21 +149,21 @@ a:hover{color:var(--clay-deep)}
 }
 
 .intro-name{font-size:46px;margin-bottom:14px}
-.intro-lede{max-width:41em}
+.intro-lede{max-width:52ch}
 
 /* ficha rótulo + valor */
 .spec{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 40px;
   padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
 }
-.spec-row{display:flex;gap:9px;align-items:baseline;font-size:14.5px;line-height:1.5}
+.spec-row{display:flex;gap:9px;align-items:baseline;font-size:15px;line-height:1.5}
 .spec-row dt{color:var(--muted);min-width:92px;flex-shrink:0}
 .spec-row dd{color:var(--ink)}
 
 /* ficha compacta da coluna do retrato */
 .mini{display:flex;flex-direction:column;gap:7px}
 .mini-row{
-  display:flex;justify-content:space-between;gap:12px;font-size:12.5px;
+  display:flex;justify-content:space-between;gap:12px;font-size:13px;
   border-bottom:1px solid var(--line-2);padding-bottom:6px;
 }
 .mini-row:last-child{border-bottom:0;padding-bottom:0}
@@ -161,7 +175,7 @@ a:hover{color:var(--clay-deep)}
 .actions{display:flex;gap:9px;flex-wrap:wrap}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:14.5px;padding:10px 17px;border:1px solid transparent;
+  font-size:15px;padding:10px 17px;border:1px solid transparent;
   transition:background .18s ease,border-color .18s ease,color .18s ease;
 }
 .btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;flex-shrink:0}
@@ -189,9 +203,9 @@ a:hover{color:var(--clay-deep)}
 }
 .card{background:var(--surface);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
 .card svg{width:19px;height:19px;stroke:var(--clay);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font-size:15.5px;font-weight:600;line-height:1.3}
-.card p{font-size:14.5px;color:var(--ink-3);line-height:1.65}
-.card-tag{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.card h3{font-size:16px;font-weight:600;line-height:1.3}
+.card p{font-size:15px;color:var(--ink-3);line-height:1.65}
+.card-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
 
 /* ---------- lista de percurso / entradas ---------- */
 
@@ -203,12 +217,13 @@ a:hover{color:var(--clay-deep)}
 .entry:last-child{border-bottom:0}
 .entry-date{font-size:13px;font-weight:600;color:var(--muted)}
 .entry-body{display:flex;flex-direction:column;gap:4px;min-width:0}
-.entry-body h3{font-size:15.5px;font-weight:600;line-height:1.35}
-.entry-org{font-weight:400;color:var(--faint)}
-.entry-body p{font-size:14.5px;color:var(--ink-3);line-height:1.65}
-.entry-body ul{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.entry-body h3{font-size:16px;font-weight:600;line-height:1.35}
+/* nome da instituição é prova de credencial: precisa de contraste de corpo */
+.entry-org{font-weight:400;color:var(--muted)}
+.entry-body p{font-size:15px;color:var(--ink-3);line-height:1.65;max-width:var(--measure-2)}
+.entry-body ul{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px;max-width:var(--measure-2)}
 .entry-body li{
-  font-size:14.5px;color:var(--ink-3);line-height:1.6;
+  font-size:15px;color:var(--ink-3);line-height:1.6;
   padding-left:15px;position:relative;
 }
 .entry-body li::before{
@@ -220,22 +235,22 @@ a:hover{color:var(--clay-deep)}
 
 .axes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .axis{background:var(--surface);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
-.axis-n{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
-.axis h3{font-size:15.5px;font-weight:600;line-height:1.3}
-.axis>p{font-size:14.5px;color:var(--ink-3);line-height:1.65}
+.axis-n{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+.axis h3{font-size:16px;font-weight:600;line-height:1.3}
+.axis>p{font-size:15px;color:var(--ink-3);line-height:1.65}
 .axis ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-.axis li{font-size:14.5px;color:var(--ink-3);line-height:1.55;padding-left:15px;position:relative}
+.axis li{font-size:15px;color:var(--ink-3);line-height:1.55;padding-left:15px;position:relative}
 .axis li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:1px;background:var(--clay-line)}
 .axis-note{
   margin-top:2px;padding-top:10px;border-top:1px solid var(--line-2);
-  font-size:12.5px;color:var(--muted);line-height:1.55;
+  font-size:13px;color:var(--muted);line-height:1.55;
 }
 
 /* ---------- cabeçalho de página interna ---------- */
 
 .page-head{display:flex;flex-direction:column;gap:14px}
 .page-head h1{font-size:38px}
-.page-head .lede{max-width:44em}
+.page-head .lede{max-width:52ch}
 
 /* ---------- projetos ---------- */
 
@@ -250,13 +265,13 @@ a:hover{color:var(--clay-deep)}
 .project-body{padding:20px;display:flex;flex-direction:column;gap:8px}
 .project-meta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay)}
 .project-body h3{font-size:16px;font-weight:600;line-height:1.3}
-.project-body p{font-size:14.5px;color:var(--ink-3);line-height:1.65}
+.project-body p{font-size:15px;color:var(--ink-3);line-height:1.65}
 
 /* ---------- contato ---------- */
 
 .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .contact-cell{background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:6px}
-.contact-cell .eyebrow{color:var(--muted);font-size:10.5px}
+.contact-cell .eyebrow{color:var(--muted);font-size:11px}
 .contact-cell a,.contact-cell p{font-size:15px}
 
 /* ---------- competências ---------- */
@@ -268,7 +283,7 @@ a:hover{color:var(--clay-deep)}
 }
 .skill-row:last-child{border-bottom:0}
 .skill-row dt{font-size:13px;font-weight:600;color:var(--muted)}
-.skill-row dd{font-size:14.5px;color:var(--ink-3);line-height:1.65}
+.skill-row dd{font-size:15px;color:var(--ink-3);line-height:1.65;max-width:var(--measure)}
 
 /* ---------- citação ---------- */
 
@@ -280,7 +295,7 @@ a:hover{color:var(--clay-deep)}
 
 /* ---------- prosa ---------- */
 
-.prose{display:flex;flex-direction:column;gap:14px;max-width:44em}
+.prose{display:flex;flex-direction:column;gap:14px;max-width:var(--measure)}
 .prose p{font-size:15px;color:var(--ink-2);line-height:1.72}
 .prose-intro{font-family:var(--serif);font-size:26px;line-height:1.32;color:var(--ink);margin-bottom:2px}
 
@@ -330,7 +345,8 @@ a:hover{color:var(--clay-deep)}
   .brand{padding:0}
   .brand-mark{font-size:21px}
   .brand-sub{font-size:9px;margin-top:4px}
-  .nav-toggle{display:block}
+  /* flex, nao block: o alvo de 44px so centraliza o icone com flex */
+  .nav-toggle{display:inline-flex}
 
   /* fechado precisa medir zero: o padding só entra com o estado aberto */
   .nav{
@@ -357,8 +373,21 @@ a:hover{color:var(--clay-deep)}
 
   /* alvo de toque confortável no celular */
   .actions{flex-direction:column}
-  .btn{justify-content:center;padding:14px 18px;min-height:48px;font-size:14.5px}
+  .btn{justify-content:center;padding:14px 18px;min-height:48px;font-size:15px}
 
   .foot{flex-direction:column;align-items:flex-start;gap:12px}
   .foot-links{flex-wrap:wrap;gap:14px}
+}
+
+/* ---------- movimento reduzido ---------- */
+
+/* Quem pediu menos animacao ve o conteudo direto, sem transicao e sem
+   depender do observer. O scroll suave tambem sai: e movimento nao pedido. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important;
+  }
+  .js-reveal{opacity:1;transform:none}
 }
