@@ -157,6 +157,10 @@ a:hover{color:var(--clay-deep)}
   border-radius:38% 42% 40% 36%/32% 30% 38% 40%;
 }
 
+/* Na coluna da página Sobre a largura é outra: altura fixa cortaria
+   demais, então a proporção manda e a foto acompanha a coluna. */
+.portrait--about{height:auto;aspect-ratio:4/5}
+
 /* Selo sólido em vez de contorno: marca o hero com um bloco de cor,
    do jeito que o badge do topo funciona como carimbo. */
 .status{
@@ -317,6 +321,38 @@ a:hover{color:var(--clay-deep)}
 .skill-row dt{font-size:13px;font-weight:600;color:var(--muted)}
 .skill-row dd{font-size:15px;color:var(--ink-3);line-height:1.65;max-width:var(--measure)}
 
+/* ---------- barras de habilidade ---------- */
+
+.skills-bars{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px 44px;
+}
+.skill-bar dt{
+  font-size:14px;color:var(--ink);
+  margin-bottom:7px;
+}
+.skill-bar dd{display:flex;align-items:center;gap:11px}
+
+/* trilho e preenchimento; --pct vem inline em cada barra */
+.bar{
+  position:relative;flex:1;height:4px;
+  background:var(--line-2);border-radius:2px;
+}
+.bar i{
+  position:absolute;inset:0 auto 0 0;width:var(--pct);
+  background:var(--ink);border-radius:2px;
+}
+/* marcador na ponta, como um cursor parado no valor */
+.bar i::after{
+  content:"";position:absolute;right:-5px;top:50%;
+  width:10px;height:10px;margin-top:-5px;
+  background:var(--surface);border:2px solid var(--ink);border-radius:50%;
+}
+.skill-bar b{
+  font-size:12px;font-weight:500;color:var(--clay);
+  min-width:34px;text-align:right;
+}
+
 /* ---------- citação ---------- */
 
 .pull{
@@ -398,12 +434,14 @@ a:hover{color:var(--clay-deep)}
   .intro{flex-direction:column;gap:18px;align-items:stretch}
   .intro-aside{width:100%}
   .portrait{height:290px}
+  /* a variante da pagina Sobre mantem a proporcao tambem no celular */
+  .portrait--about{height:auto}
   .intro-name{font-size:34px}
   .page-head h1{font-size:30px}
   .spec{grid-template-columns:1fr;gap:9px}
   .two-col{grid-template-columns:1fr;gap:28px}
 
-  .cards,.axes,.projects,.contact-grid{grid-template-columns:1fr}
+  .cards,.axes,.projects,.contact-grid,.skills-bars{grid-template-columns:1fr}
   .entry{grid-template-columns:1fr;gap:6px}
   .skill-row{grid-template-columns:1fr;gap:4px}
 
