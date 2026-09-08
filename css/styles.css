@@ -1,22 +1,29 @@
 /* ============================================================
    Jamille Paysano Hissa — identidade visual
-   Editorial de moda com rigor de gestão.
-   Branco + ink + argila. Serifa didone no display, sans no corpo.
+   Estrutura: menu lateral fixo, ficha rótulo+valor, cards em grade.
+   Instrument Serif no display, Karla no corpo. Argila como accent.
    ============================================================ */
 
 :root{
-  --bone:#FFFFFF;
-  --bone-2:#F5F5F4;
-  --ink:#15120E;
-  --ink-soft:#3A342C;
-  --stone:#6E665B;
-  --line:#E4E2DE;
-  --clay:#A4482A;
-  --clay-deep:#7E351D;
-  --sand:#EDEDEB;
-  --white:#FFFFFF;
-  --radius:2px;
-  --wrap:1180px;
+  --bg:#FBFAF8;
+  --surface:#FFFFFF;
+  --ink:#1C1917;
+  --ink-2:#57534E;
+  --ink-3:#78716C;
+  --muted:#8A8178;
+  --faint:#A8A099;
+  --line:#E7E2DA;
+  --line-2:#EDE8E0;
+  --clay:#8C4A32;
+  --clay-deep:#6B3524;
+  --clay-line:#E0CFC5;
+  --clay-wash:#F4F1EC;
+
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:Karla,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+
+  --nav-w:208px;
+  --pad-x:60px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -24,280 +31,335 @@
 html{font-size:16px;scroll-behavior:smooth}
 
 body{
-  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:var(--bone);
+  font-family:var(--sans);
+  background:var(--bg);
   color:var(--ink);
-  line-height:1.65;
+  font-size:15px;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  display:flex;flex-direction:column;min-height:100vh;
 }
 
-main{flex:1}
 img{max-width:100%;height:auto;display:block}
-a{color:inherit;text-decoration:none}
-
-.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 2rem}
+a{color:var(--clay);text-decoration:none;transition:color .18s ease}
+a:hover{color:var(--clay-deep)}
 
 /* ---------- tipografia ---------- */
 
 .display{
-  font-family:'Bodoni Moda',Georgia,serif;
+  font-family:var(--serif);
   font-weight:400;
   letter-spacing:-.015em;
-  line-height:1.04;
+  line-height:1.06;
 }
 .display em{font-style:italic;color:var(--clay)}
 
 .eyebrow{
-  font-size:.7rem;font-weight:500;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--clay);
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--clay);
 }
-.eyebrow--muted{color:var(--stone)}
+.eyebrow--muted{color:var(--muted)}
 
-.lede{font-size:1.12rem;font-weight:300;color:var(--ink-soft);line-height:1.75}
+.lede{font-size:16.5px;line-height:1.68;color:var(--ink-2);text-wrap:pretty}
 
-.rule{height:1px;background:var(--line);border:0;margin:0}
+/* ---------- layout base ---------- */
 
-/* ---------- header ---------- */
+.shell{display:flex;min-height:100vh}
 
-header{
-  position:fixed;top:0;left:0;right:0;z-index:900;
-  transition:background .35s ease, box-shadow .35s ease;
+.content{
+  flex-grow:1;min-width:0;
+  margin-left:var(--nav-w);
+  padding:52px var(--pad-x) 60px;
+  display:flex;flex-direction:column;gap:56px;
 }
-header.scrolled{
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  box-shadow:0 1px 0 var(--line);
+
+/* ---------- menu lateral ---------- */
+
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--nav-w);
+  background:var(--surface);border-right:1px solid var(--line);
+  padding:40px 0 32px;
+  display:flex;flex-direction:column;gap:44px;
+  z-index:900;
 }
-.navbar{
-  max-width:var(--wrap);margin:0 auto;padding:0 2rem;height:68px;
-  display:flex;align-items:center;justify-content:space-between;gap:2rem;
-}
-.brand{display:flex;align-items:baseline;gap:.55rem}
+
+.brand{display:block;padding:0 28px;color:var(--ink)}
+.brand:hover{color:var(--ink)}
 .brand-mark{
-  font-family:'Bodoni Moda',serif;font-size:1.45rem;font-weight:400;
-  letter-spacing:.02em;
+  font-family:var(--serif);font-size:27px;line-height:1;letter-spacing:-.01em;
+  display:block;
 }
-.brand-mark span{color:var(--clay);font-style:italic}
+.brand-mark span{font-style:italic;color:var(--clay)}
 .brand-sub{
-  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
+  display:block;margin-top:8px;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
 }
-.nav-links{display:flex;align-items:center;gap:1.85rem;list-style:none}
-.nav-links a{
-  font-size:.82rem;letter-spacing:.04em;color:var(--ink-soft);
-  padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s;
+
+.nav{display:flex;flex-direction:column;gap:2px;padding:0 16px;list-style:none}
+.nav a{
+  display:flex;align-items:center;gap:11px;
+  padding:9px 12px;font-size:14px;color:var(--ink-2);
+  border-left:2px solid transparent;transition:background .18s ease,color .18s ease;
 }
-.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--clay)}
-.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
-.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0;transition:.25s}
+.nav a:hover{background:var(--clay-wash);color:var(--ink)}
+.nav a.active{background:var(--clay-wash);border-left-color:var(--clay);color:var(--ink);font-weight:500}
+.nav svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 
-/* ---------- hero ---------- */
+.sidebar-foot{margin-top:auto;padding:0 28px;display:flex;flex-direction:column;gap:14px}
+.social{display:flex;gap:14px}
+.social a{color:var(--muted);display:flex}
+.social a:hover{color:var(--clay)}
+.social svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
+.sidebar-base{font-size:11px;color:var(--faint);line-height:1.5}
 
-.hero{padding:11rem 0 5.5rem;position:relative;overflow:hidden}
-.hero::after{
-  content:"";position:absolute;right:-14vw;top:14%;
-  width:46vw;height:46vw;max-width:620px;max-height:620px;
-  border:1px solid var(--line);border-radius:50%;pointer-events:none;
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:6px}
+.nav-toggle svg{width:22px;height:22px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round}
+.topbar{display:none}
+
+/* ---------- cabeçalho de apresentação ---------- */
+
+.intro{display:flex;gap:44px;align-items:flex-start}
+.intro-aside{flex-shrink:0;width:244px;display:flex;flex-direction:column;gap:16px}
+.intro-main{flex-grow:1;min-width:0;display:flex;flex-direction:column;gap:20px}
+
+.portrait{
+  width:100%;height:300px;object-fit:cover;object-position:center 14%;
+  filter:saturate(.94);
 }
-.hero-grid{display:grid;grid-template-columns:1.55fr .95fr;gap:4.5rem;align-items:end;position:relative;z-index:2}
-.hero-name{font-size:clamp(3rem,7.5vw,6rem);margin:1.4rem 0 1.8rem}
-.hero-mission{max-width:34rem;margin-bottom:2.4rem}
 
-.cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+.status{
+  align-self:flex-start;
+  border:1px solid var(--clay-line);padding:5px 11px;
+}
+.status::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--clay);
+}
+
+.intro-name{font-size:46px;margin-bottom:14px}
+.intro-lede{max-width:41em}
+
+/* ficha rótulo + valor */
+.spec{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 40px;
+  padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.spec-row{display:flex;gap:9px;align-items:baseline;font-size:13.5px;line-height:1.5}
+.spec-row dt{color:var(--muted);min-width:92px;flex-shrink:0}
+.spec-row dd{color:var(--ink)}
+
+/* ficha compacta da coluna do retrato */
+.mini{display:flex;flex-direction:column;gap:7px}
+.mini-row{
+  display:flex;justify-content:space-between;gap:12px;font-size:12.5px;
+  border-bottom:1px solid var(--line-2);padding-bottom:6px;
+}
+.mini-row:last-child{border-bottom:0;padding-bottom:0}
+.mini-row dt{color:var(--muted)}
+.mini-row dd{font-weight:500;text-align:right}
+
+/* ---------- botões ---------- */
+
+.actions{display:flex;gap:9px;flex-wrap:wrap}
 .btn{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.82rem 1.7rem;font-size:.83rem;letter-spacing:.06em;
-  text-transform:uppercase;font-weight:500;border-radius:var(--radius);
-  transition:.22s ease;border:1px solid transparent;
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13.5px;padding:10px 17px;border:1px solid transparent;
+  transition:background .18s ease,border-color .18s ease,color .18s ease;
 }
-.btn-solid{background:var(--ink);color:var(--bone)}
-.btn-solid:hover{background:var(--clay)}
-.btn-ghost{border-color:var(--line);color:var(--ink-soft)}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;flex-shrink:0}
+.btn-solid{background:var(--ink);color:var(--bg)}
+.btn-solid:hover{background:var(--clay);color:var(--bg)}
+.btn-ghost{background:var(--surface);border-color:#DDD6CC;color:var(--ink)}
 .btn-ghost:hover{border-color:var(--ink);color:var(--ink)}
-
-/* ficha lateral do hero */
-.spec{border-top:2px solid var(--ink);padding-top:1.1rem}
-.spec-row{display:flex;justify-content:space-between;gap:1rem;padding:.72rem 0;border-bottom:1px solid var(--line);font-size:.84rem}
-.spec-row dt{color:var(--stone);letter-spacing:.02em}
-.spec-row dd{text-align:right;font-weight:500}
 
 /* ---------- seções ---------- */
 
-.section{padding:5.5rem 0}
-.section--alt{background:var(--bone-2)}
-.section-head{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:2.6rem}
-.section-num{
-  font-family:'Bodoni Moda',serif;font-size:.95rem;color:var(--clay);
-  font-style:italic;padding-top:.2rem;
+.block{display:flex;flex-direction:column;gap:22px}
+.block-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  border-bottom:1px solid var(--line);padding-bottom:13px;
 }
-.section-title{font-family:'Bodoni Moda',serif;font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:400;line-height:1.1}
+.block-title{font-family:var(--serif);font-size:27px;font-weight:400;letter-spacing:-.01em}
+.block-note{font-size:12px;color:var(--faint)}
+.block-note a{color:var(--clay)}
 
-.two-col{display:grid;grid-template-columns:1.35fr .65fr;gap:4rem;align-items:start}
-.prose p{margin-bottom:1.15rem;color:var(--ink-soft)}
-.prose p:last-child{margin-bottom:0}
-.pull{
-  font-family:'Bodoni Moda',serif;font-size:1.32rem;line-height:1.45;
-  border-left:2px solid var(--clay);padding-left:1.3rem;color:var(--ink);
+/* ---------- grade de cards ---------- */
+
+.cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);
 }
-.pull-cap{margin-top:1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
+.card{background:var(--surface);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.card svg{width:19px;height:19px;stroke:var(--clay);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:15.5px;font-weight:600;line-height:1.3}
+.card p{font-size:13.5px;color:var(--ink-3);line-height:1.6}
+.card-tag{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
 
-/* ---------- retrato ---------- */
+/* ---------- lista de percurso / entradas ---------- */
 
-/* imagem a esquerda, texto a direita: inverte a proporcao padrao do .two-col */
-.two-col--portrait{grid-template-columns:.72fr 1.28fr;align-items:start}
-
-.portrait{position:relative}
-.portrait img{
-  width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 12%;
-  background:var(--sand);border-radius:var(--radius);
-  /* o fundo de estudio da foto e branco: sem o fio a borda some na faixa clara */
-  border:1px solid var(--line);
+.entries{display:flex;flex-direction:column}
+.entry{
+  display:grid;grid-template-columns:128px 1fr;gap:28px;
+  padding:17px 0;border-bottom:1px solid var(--line-2);align-items:start;
 }
-/* moldura deslocada, mesmo gesto do circulo do hero */
-.portrait::before{
-  content:"";position:absolute;inset:auto auto -14px -14px;
-  width:62%;height:62%;border:1px solid var(--clay);
-  border-radius:var(--radius);z-index:-1;pointer-events:none;
+.entry:last-child{border-bottom:0}
+.entry-date{font-size:13px;font-weight:600;color:var(--muted)}
+.entry-body{display:flex;flex-direction:column;gap:4px;min-width:0}
+.entry-body h3{font-size:15.5px;font-weight:600;line-height:1.35}
+.entry-org{font-weight:400;color:var(--faint)}
+.entry-body p{font-size:13.5px;color:var(--ink-3);line-height:1.6}
+.entry-body ul{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.entry-body li{
+  font-size:13.5px;color:var(--ink-3);line-height:1.6;
+  padding-left:15px;position:relative;
 }
-.portrait figcaption{
-  margin-top:1.15rem;font-size:.76rem;line-height:1.55;
-  letter-spacing:.02em;color:var(--stone);
+.entry-body li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:6px;height:1px;background:var(--clay-line);
 }
-.portrait figcaption strong{
-  display:block;font-family:'Bodoni Moda',Georgia,serif;
-  font-size:1.02rem;font-weight:400;letter-spacing:0;
-  color:var(--ink);margin-bottom:.2rem;
-}
-
-.prose-intro{
-  font-family:'Bodoni Moda',Georgia,serif;
-  font-size:1.42rem;line-height:1.35;color:var(--ink);
-  margin-bottom:1.5rem;
-}
-
-.two-col--portrait .pull{margin-top:2rem}
-
-/* ---------- grade de expertise ---------- */
-
-.grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.cardx{background:var(--bone-2);padding:2rem 1.6rem;transition:background .25s ease}
-.cardx:hover{background:var(--white)}
-.cardx-tag{
-  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--stone);margin-bottom:.85rem;display:block;
-}
-.cardx-tag--dual{color:var(--clay);font-weight:600}
-.cardx h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.16rem;line-height:1.25;margin-bottom:.7rem}
-.cardx p{font-size:.87rem;color:var(--stone);line-height:1.62}
-.cardx-icon{width:26px;height:26px;margin-bottom:1.15rem;stroke:var(--ink);fill:none;stroke-width:1.4}
 
 /* ---------- eixos ---------- */
 
-.axes{display:grid;grid-template-columns:repeat(3,1fr);gap:2.6rem}
-.axis{border-top:2px solid var(--ink);padding-top:1.2rem}
-.axis-n{font-family:'Bodoni Moda',serif;font-style:italic;color:var(--clay);font-size:.95rem}
-.axis h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.3rem;margin:.35rem 0 .8rem}
-.axis p{font-size:.9rem;color:var(--stone);margin-bottom:.9rem}
-.axis ul{list-style:none;font-size:.86rem;color:var(--ink-soft)}
-.axis li{padding-left:1rem;position:relative;margin-bottom:.45rem}
-.axis li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:1px;background:var(--clay)}
-.axis-note{margin-top:1rem;font-size:.78rem;font-style:italic;color:var(--stone);line-height:1.6}
+.axes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.axis{background:var(--surface);padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.axis-n{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay)}
+.axis h3{font-size:15.5px;font-weight:600;line-height:1.3}
+.axis>p{font-size:13.5px;color:var(--ink-3);line-height:1.6}
+.axis ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.axis li{font-size:13.5px;color:var(--ink-3);line-height:1.55;padding-left:15px;position:relative}
+.axis li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:1px;background:var(--clay-line)}
+.axis-note{
+  margin-top:2px;padding-top:10px;border-top:1px solid var(--line-2);
+  font-size:12.5px;color:var(--muted);line-height:1.55;
+}
 
-/* ---------- listagem (experiência, formação) ---------- */
+/* ---------- cabeçalho de página interna ---------- */
 
-.entry{display:grid;grid-template-columns:170px 1fr;gap:2.5rem;padding:2.2rem 0;border-bottom:1px solid var(--line)}
-.entry:first-of-type{border-top:1px solid var(--line)}
-.entry-date{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);padding-top:.35rem}
-.entry h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.42rem;line-height:1.2;margin-bottom:.25rem}
-.entry-org{font-size:.88rem;color:var(--clay);margin-bottom:1rem}
-.entry ul{list-style:none}
-.entry li{padding-left:1.15rem;position:relative;margin-bottom:.55rem;color:var(--ink-soft);font-size:.94rem}
-.entry li::before{content:"";position:absolute;left:0;top:.68em;width:6px;height:1px;background:var(--stone)}
+.page-head{display:flex;flex-direction:column;gap:14px}
+.page-head h1{font-size:38px}
+.page-head .lede{max-width:44em}
 
 /* ---------- projetos ---------- */
 
-.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem}
-.project{border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.project{background:var(--surface);display:flex;flex-direction:column}
 .project-canvas{
-  aspect-ratio:4/3;background:var(--sand);position:relative;overflow:hidden;
+  aspect-ratio:4/3;background:var(--clay-wash);
   display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--line);
 }
-.project-canvas span{
-  font-family:'Bodoni Moda',serif;font-size:.74rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--stone);
-}
-.project-body{padding:1.7rem}
-.project h3{font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.3rem;margin-bottom:.4rem}
-.project-meta{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:.9rem}
-.project p{font-size:.9rem;color:var(--stone)}
-
-/* ---------- tabela de competências ---------- */
-
-.skills{border-top:2px solid var(--ink)}
-.skill-row{display:grid;grid-template-columns:200px 1fr;gap:2rem;padding:1.05rem 0;border-bottom:1px solid var(--line)}
-.skill-row dt{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);padding-top:.15rem}
-.skill-row dd{font-size:.93rem;color:var(--ink-soft)}
+.project-canvas span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.project-body{padding:20px;display:flex;flex-direction:column;gap:8px}
+.project-meta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay)}
+.project-body h3{font-size:16px;font-weight:600;line-height:1.3}
+.project-body p{font-size:13.5px;color:var(--ink-3);line-height:1.6}
 
 /* ---------- contato ---------- */
 
-.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.contact-cell{background:var(--bone);padding:2.2rem 1.8rem}
-.contact-cell .eyebrow{margin-bottom:.6rem;display:block}
-.contact-cell a,.contact-cell p{font-family:'Bodoni Moda',serif;font-size:1.18rem;color:var(--ink);word-break:break-word}
-.contact-cell a:hover{color:var(--clay)}
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.contact-cell{background:var(--surface);padding:20px;display:flex;flex-direction:column;gap:6px}
+.contact-cell .eyebrow{color:var(--muted);font-size:10.5px}
+.contact-cell a,.contact-cell p{font-size:15px}
+
+/* ---------- competências ---------- */
+
+.skills{display:flex;flex-direction:column}
+.skill-row{
+  display:grid;grid-template-columns:170px 1fr;gap:28px;
+  padding:15px 0;border-bottom:1px solid var(--line-2);
+}
+.skill-row:last-child{border-bottom:0}
+.skill-row dt{font-size:13px;font-weight:600;color:var(--muted)}
+.skill-row dd{font-size:13.5px;color:var(--ink-3);line-height:1.65}
+
+/* ---------- citação ---------- */
+
+.pull{
+  font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--ink);
+  border-left:2px solid var(--clay);padding-left:18px;font-weight:400;
+}
+.pull-cap{margin-top:10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- prosa ---------- */
+
+.prose{display:flex;flex-direction:column;gap:14px;max-width:44em}
+.prose p{font-size:15px;color:var(--ink-2);line-height:1.72}
+.prose-intro{font-family:var(--serif);font-size:26px;line-height:1.32;color:var(--ink);margin-bottom:2px}
+
+.two-col{display:grid;grid-template-columns:1.4fr .6fr;gap:44px;align-items:start}
 
 /* ---------- rodapé ---------- */
 
-footer{border-top:1px solid var(--line);padding:2.6rem 0;margin-top:auto;background:var(--bone)}
-.footer-in{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.footer-in p,.footer-in a{font-size:.8rem;color:var(--stone)}
-.footer-links{display:flex;gap:1.4rem}
-.footer-links a:hover{color:var(--clay)}
-
-/* ---------- página interna ---------- */
-
-.page-head{padding:10rem 0 3.2rem;border-bottom:1px solid var(--line)}
-.page-head .display{font-size:clamp(2.4rem,5.5vw,4rem);margin-top:1rem}
-.page-head .lede{margin-top:1.3rem;max-width:44rem}
+.foot{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:20px;
+  font-size:12px;color:var(--faint);
+}
+.foot-links{display:flex;gap:18px}
+.foot-links a{color:var(--faint)}
+.foot-links a:hover{color:var(--clay)}
 
 /* ---------- reveal ---------- */
 
-.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
-.js-reveal{opacity:0;transform:translateY(24px)}
+.reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.js-reveal{opacity:0;transform:translateY(16px)}
 .js-reveal.on{opacity:1;transform:translateY(0)}
 
 /* ---------- responsivo ---------- */
 
-@media(max-width:960px){
-  .hero-grid,.two-col,.two-col--portrait{grid-template-columns:1fr;gap:2.6rem}
-  /* a moldura deslocada sai do wrap quando o retrato ocupa a coluna toda */
-  .portrait{max-width:320px;margin-left:14px}
-  .grid-6{grid-template-columns:repeat(2,1fr)}
-  .axes{grid-template-columns:1fr;gap:2rem}
-  .projects{grid-template-columns:1fr}
-  .hero::after{display:none}
+@media(max-width:1080px){
+  :root{--pad-x:40px}
+  .cards,.axes{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:680px){
-  .wrap,.navbar{padding:0 1.25rem}
-  .hero{padding:8.5rem 0 4rem}
-  .grid-6{grid-template-columns:1fr}
-  .entry{grid-template-columns:1fr;gap:.8rem}
-  .contact-grid{grid-template-columns:1fr}
-  .skill-row{grid-template-columns:1fr;gap:.35rem}
+
+@media(max-width:860px){
+  :root{--pad-x:20px}
+
+  /* .shell e flex-row no desktop: no celular precisa empilhar,
+     senao a barra lateral vira uma coluna estreita e o conteudo transborda */
+  .shell{display:block}
+
+  /* o menu lateral vira barra no topo */
+  .sidebar{
+    position:sticky;top:0;left:auto;bottom:auto;width:100%;
+    flex-direction:column;gap:0;padding:0;
+    border-right:0;border-bottom:1px solid var(--line);
+  }
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;
+  }
+  .brand{padding:0}
+  .brand-mark{font-size:21px}
+  .brand-sub{font-size:9px;margin-top:4px}
   .nav-toggle{display:block}
-  /* Fechado precisa medir zero. Com border-box o padding nao comprime,
-     entao ele so entra junto com o estado aberto. */
-  .nav-links{
-    position:absolute;top:68px;left:0;right:0;flex-direction:column;
-    align-items:flex-start;gap:0;background:var(--bone);
-    border-top:0;padding:0 1.25rem;
-    max-height:0;overflow:hidden;
-    transition:max-height .3s ease,padding .3s ease;
+
+  /* fechado precisa medir zero: o padding só entra com o estado aberto */
+  .nav{
+    max-height:0;overflow:hidden;padding:0 12px;
+    transition:max-height .28s ease,padding .28s ease;
   }
-  .nav-links.open{
-    max-height:360px;padding:.5rem 1.25rem 1.25rem;
-    border-top:1px solid var(--line);
-  }
-  .nav-links li{width:100%;border-bottom:1px solid var(--line)}
-  .nav-links a{display:block;padding:.85rem 0;border-bottom:0}
+  .nav.open{max-height:420px;padding:8px 12px 16px;border-top:1px solid var(--line-2)}
+  .nav a{padding:12px;min-height:44px}
+  .sidebar-foot{display:none}
+
+  .content{margin-left:0;padding:26px var(--pad-x) 40px;gap:34px}
+
+  .intro{flex-direction:column;gap:18px}
+  .intro-aside{width:100%}
+  .portrait{height:290px}
+  .intro-name{font-size:34px}
+  .page-head h1{font-size:30px}
+  .spec{grid-template-columns:1fr;gap:9px}
+  .two-col{grid-template-columns:1fr;gap:28px}
+
+  .cards,.axes,.projects,.contact-grid{grid-template-columns:1fr}
+  .entry{grid-template-columns:1fr;gap:6px}
+  .skill-row{grid-template-columns:1fr;gap:4px}
+
+  /* alvo de toque confortável no celular */
+  .actions{flex-direction:column}
+  .btn{justify-content:center;padding:14px 18px;min-height:48px;font-size:14.5px}
+
+  .foot{flex-direction:column;align-items:flex-start;gap:12px}
+  .foot-links{flex-wrap:wrap;gap:14px}
 }

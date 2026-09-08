@@ -1,19 +1,16 @@
-// Header ganha fundo depois de rolar.
-const header = document.querySelector('header');
-const onScroll = () => header && header.classList.toggle('scrolled', window.scrollY > 24);
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
-
-// Menu mobile.
+// Menu no celular: a barra lateral vira lista retrátil no topo.
 const toggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('.nav-links');
-if (toggle && links) {
+const nav = document.querySelector('.nav');
+if (toggle && nav) {
   toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
+    const open = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(open));
   });
-  links.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => links.classList.remove('open'))
+  nav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
   );
 }
 
